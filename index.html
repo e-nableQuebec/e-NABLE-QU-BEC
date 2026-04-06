@@ -1,0 +1,1702 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>e-NABLE Québec | Site une page</title>
+  <meta name="description" content="e-NABLE Québec conçoit des solutions prosthétiques imprimées en 3D, accessibles, humaines et innovantes, en collaboration avec des bénévoles, ingénieurs et professionnels de la santé." />
+
+  <style>
+    :root{
+      --blue:#315D97;
+      --blue-dark:#0B316A;
+      --green:#6DA051;
+      --gold:#C9A227;
+      --text:#0b1220;
+      --muted:rgba(11,18,32,.66);
+      --stroke:rgba(11,18,32,.10);
+      --white:rgba(255,255,255,.84);
+      --shadow:0 18px 50px rgba(11,18,32,.10);
+      --radius:24px;
+      --max:1180px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    section[id], header[id]{
+      scroll-margin-top: 120px;
+    }
+    body{
+      margin:0;
+      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 600px at 10% -10%, rgba(49,93,151,.18), transparent 55%),
+        radial-gradient(900px 520px at 95% 5%, rgba(109,160,81,.15), transparent 55%),
+        linear-gradient(180deg, #f8fbff 0%, #ffffff 52%, #f7fff9 100%);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    img{ display:block; max-width:100%; }
+    .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+    .reveal.on{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(14px);
+      background:linear-gradient(to bottom, rgba(248,251,255,.94), rgba(248,251,255,.72));
+      border-bottom:1px solid var(--stroke);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 0;
+    }
+    
+    .nav-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    
+    .lang-btn{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.85);
+      color:var(--text);
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+      transition:transform .2s, background .2s, box-shadow .2s;
+      box-shadow:0 4px 12px rgba(11,18,32,.06);
+    }
+    .lang-btn:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 6px 16px rgba(11,18,32,.10);
+    }
+    .lang-btn svg{
+      width:16px;
+      height:16px;
+    }
+    
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:220px;
+    }
+    .brand img{
+      width:46px;
+      height:46px;
+      object-fit:contain;
+    }
+    .brand strong{ font-size:17px; font-weight:800; }
+    .brand span{ display:block; color:var(--muted); font-size:12px; }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .menu-link,
+    .drop-btn{
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:650;
+      padding:10px 14px;
+      border-radius:14px;
+      cursor:pointer;
+      transition:background .2s, color .2s, transform .2s;
+    }
+    .menu-link:hover,
+    .drop-btn:hover,
+    .dropdown:hover .drop-btn{
+      background:rgba(11,18,32,.05);
+      color:var(--text);
+      transform:translateY(-1px);
+    }
+
+    .dropdown{ position:relative; }
+    .drop-panel{
+      position:absolute;
+      top:calc(100% + 8px);
+      right:0;
+      min-width:300px;
+      padding:10px;
+      border-radius:20px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 24px 70px rgba(11,18,32,.16);
+      opacity:0;
+      transform:translateY(8px);
+      pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .dropdown:hover .drop-panel,
+    .dropdown:focus-within .drop-panel{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
+    .drop-item{
+      display:block;
+      padding:12px 14px;
+      border-radius:16px;
+      transition:background .2s ease, transform .2s ease;
+    }
+    .drop-item:hover{
+      background:rgba(49,93,151,.08);
+      transform:translateX(2px);
+    }
+    .drop-item b{ display:block; font-size:14px; margin-bottom:4px; }
+    .drop-item span{ display:block; font-size:12px; color:var(--muted); line-height:1.45; }
+
+    header{ padding:42px 0 24px; position:relative; }
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:24px;
+      align-items:stretch;
+    }
+    @media (max-width: 960px){
+      .hero{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      background:var(--white);
+      box-shadow:var(--shadow);
+    }
+
+    .hero-left{
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+    }
+    .hero-glow{
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 25% 30%, rgba(49,93,151,.22), transparent 48%),
+        radial-gradient(circle at 70% 55%, rgba(109,160,81,.14), transparent 55%);
+      filter:blur(30px);
+      animation:floatGlow 10s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes floatGlow{
+      0%,100%{ transform:translate3d(0,0,0) scale(1); }
+      50%{ transform:translate3d(20px,-12px,0) scale(1.03); }
+    }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.70);
+      color:var(--muted);
+      font-size:12px;
+      font-weight:650;
+      margin-bottom:18px;
+    }
+    .k-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(49,93,151,.14);
+    }
+
+    h1.hero-title{
+      margin:0;
+      text-align:left;
+      font-size:clamp(54px, 8vw, 102px);
+      line-height:.95;
+      letter-spacing:-2px;
+      font-weight:900;
+      max-width:10ch;
+    }
+    .accent{
+      background:linear-gradient(90deg, #003DA5, #5f8fff);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero-subtitle{
+      margin:18px 0 0;
+      font-size:clamp(22px, 2.6vw, 34px);
+      line-height:1.15;
+      letter-spacing:-.6px;
+      max-width:20ch;
+    }
+    .lead{
+      margin:18px 0 24px;
+      max-width:68ch;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:16px;
+    }
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      padding:12px 18px;
+      border-radius:16px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.85);
+      color:var(--text);
+      font-weight:750;
+      cursor:pointer;
+      transition:transform .2s, background .2s, box-shadow .2s, border-color .2s;
+      box-shadow:0 10px 22px rgba(11,18,32,.06);
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.96);
+    }
+    .btn.primary{
+      color:white;
+      border-color:rgba(49,93,151,.35);
+      background:linear-gradient(135deg, rgba(49,93,151,.98), rgba(11,49,106,.94));
+      box-shadow:0 18px 36px rgba(49,93,151,.22);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:24px;
+      max-width:520px;
+    }
+    .stat{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.70);
+      text-align:center;
+    }
+    .stat b{
+      display:block;
+      font-size:30px;
+      margin-bottom:4px;
+    }
+    .stat span{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .hero-right{
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+    }
+    .hero-media{
+      position:relative;
+      overflow:hidden;
+      min-height:320px;
+      padding:0;
+    }
+    .hero-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1.03);
+    }
+    .hero-badge{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.82);
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(11,18,32,.10);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .hero-badge strong{ color:var(--text); }
+
+    .side-card{ padding:18px; }
+    .side-card h3{ margin:0 0 8px; font-size:18px; }
+    .side-card p{ margin:0; color:var(--muted); line-height:1.65; }
+
+    section{ padding:34px 0; }
+    .section-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size:24px;
+      letter-spacing:-.5px;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      max-width:74ch;
+      line-height:1.6;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .grid-3{ grid-template-columns:1fr; }
+    }
+
+    .feature{
+      position:relative;
+      overflow:hidden;
+      padding:22px;
+      border-radius:24px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.72);
+      box-shadow:0 12px 30px rgba(11,18,32,.06);
+      transition:transform .2s, box-shadow .2s, background .2s;
+    }
+    .feature:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 40px rgba(11,18,32,.08);
+      background:rgba(255,255,255,.90);
+    }
+    .icon{
+      width:46px;
+      height:46px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      margin-bottom:12px;
+      border:1px solid rgba(11,18,32,.08);
+      background:linear-gradient(135deg, rgba(49,93,151,.14), rgba(109,160,81,.12));
+    }
+    .feature h3{ margin:0 0 8px; font-size:18px; }
+    .feature p{ margin:0; color:var(--muted); line-height:1.7; font-size:14px; }
+
+    .slider{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.75);
+      box-shadow:var(--shadow);
+    }
+    .track{
+      display:flex;
+      transition:transform .55s cubic-bezier(.2,.8,.2,1);
+      will-change:transform;
+    }
+    .slide{
+      min-width:100%;
+      height:360px;
+      position:relative;
+    }
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .slide::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top, rgba(11,18,32,.56), transparent 60%);
+    }
+    .caption{
+      position:absolute;
+      left:18px;
+      right:18px;
+      bottom:16px;
+      z-index:2;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      color:white;
+    }
+    .caption b{ font-size:15px; }
+    .caption span{ font-size:12px; color:rgba(255,255,255,.78); }
+
+    .slider-controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+    .dots{ display:flex; gap:8px; align-items:center; }
+    .s-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(11,18,32,.20);
+      cursor:pointer;
+    }
+    .s-dot.active{
+      background:var(--green);
+      border-color:rgba(109,160,81,.35);
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.75);
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .participate-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+    @media (max-width: 860px){
+      .participate-grid{ grid-template-columns:1fr; }
+    }
+    .entry-card{
+      padding:24px;
+      border-radius:24px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.75);
+      box-shadow:0 12px 30px rgba(11,18,32,.06);
+      transition:transform .2s ease, background .2s ease;
+      display:flex;
+      flex-direction:column;
+    }
+    .entry-card:hover{
+      transform:translateY(-3px);
+      background:rgba(255,255,255,.92);
+    }
+    .entry-card h3{ margin:0 0 8px; font-size:22px; }
+    .entry-card p{ margin:0 0 16px; color:var(--muted); line-height:1.7; }
+    .entry-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:auto;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin: 8px 0 14px;
+    }
+    .input{
+      flex:1;
+      min-width:220px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.80);
+      color:var(--text);
+      outline:none;
+      box-shadow:0 10px 22px rgba(11,18,32,.06);
+    }
+    .input::placeholder{ color:rgba(11,18,32,.40); }
+    .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+    .chip{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.78);
+      color:var(--muted);
+      font-size:12px;
+      cursor:pointer;
+      transition:background .18s, transform .18s, color .18s, border-color .18s;
+      box-shadow:0 10px 20px rgba(11,18,32,.05);
+    }
+    .chip.active{
+      color:var(--text);
+      border-color:rgba(49,93,151,.35);
+      background:rgba(49,93,151,.12);
+    }
+
+    .members{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+    @media (max-width: 980px){ .members{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 620px){ .members{ grid-template-columns: 1fr;} }
+
+    .member{
+      min-height:430px;
+      padding:24px 18px 20px;
+      border-radius:30px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.82);
+      box-shadow:0 14px 34px rgba(11,18,32,.07);
+      text-align:center;
+      cursor:pointer;
+      transition:transform .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+    .member:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 24px 48px rgba(11,18,32,.10);
+    }
+    .avatar{
+      width:min(240px, 82%);
+      aspect-ratio:1/1;
+      margin:0 auto 18px;
+      border-radius:50%;
+      overflow:hidden;
+      border:6px solid rgba(255,255,255,.95);
+      box-shadow:0 18px 34px rgba(11,18,32,.12);
+      background:rgba(11,18,32,.05);
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .member b{
+      display:block;
+      font-size:21px;
+      margin-bottom:8px;
+    }
+    .member small{
+      display:block;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.5;
+      max-width:26ch;
+      margin:0 auto;
+    }
+
+    #donation{ padding-top:14px; }
+    .don-card{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      border:1px solid rgba(11,18,32,.08);
+      background:
+        linear-gradient(135deg, rgba(0,61,165,.10), rgba(200,16,46,.07)),
+        radial-gradient(900px 420px at 20% 0%, rgba(0,61,165,.16), transparent 55%),
+        radial-gradient(700px 380px at 95% 25%, rgba(200,16,46,.12), transparent 55%),
+        rgba(255,255,255,.88);
+      box-shadow:0 26px 80px rgba(11,18,32,.12);
+    }
+    .don-glow{
+      position:absolute;
+      inset:-35%;
+      background:
+        radial-gradient(circle at 28% 30%, rgba(0,61,165,.20), transparent 52%),
+        radial-gradient(circle at 72% 55%, rgba(200,16,46,.14), transparent 55%);
+      filter:blur(28px);
+      pointer-events:none;
+    }
+    .don-content{
+      position:relative;
+      padding:30px;
+      max-width:760px;
+      display:grid;
+      gap:12px;
+    }
+    .don-title{ margin:0; font-size:clamp(24px, 3vw, 34px); }
+    .don-text{ margin:0; color:var(--muted); line-height:1.75; }
+    .don-actions{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-top:6px; }
+    .don-link{
+      color:rgba(11,18,32,.72);
+      text-decoration:underline;
+      text-underline-offset:4px;
+      text-decoration-color:rgba(11,18,32,.24);
+    }
+
+    .contact-wrap{
+      display:flex;
+      justify-content:center;
+    }
+    .contact-card{
+      width:min(720px, 100%);
+      padding:30px;
+      text-align:center;
+    }
+    .contact-card p{ color:var(--muted); line-height:1.7; }
+
+    .project-toast{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:120;
+      width:min(390px, calc(100% - 28px));
+      padding:22px 20px 18px;
+      border-radius:24px;
+      border:1px solid rgba(11,18,32,.10);
+      background:rgba(255,255,255,.96);
+      box-shadow:0 26px 80px rgba(11,18,32,.18);
+      backdrop-filter:blur(10px);
+    }
+    .toast-kicker{
+      display:inline-flex;
+      padding:7px 11px;
+      border-radius:999px;
+      background:rgba(49,93,151,.10);
+      color:var(--blue-dark);
+      font-size:12px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+    .project-toast h3{
+      margin:0 0 8px;
+      font-size:24px;
+      letter-spacing:-.4px;
+    }
+    .project-toast p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:14px;
+    }
+    .toast-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      margin-top:16px;
+    }
+    .toast-close{
+      position:absolute;
+      top:12px;
+      right:12px;
+      border:none;
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      background:rgba(11,18,32,.06);
+      cursor:pointer;
+      font-size:20px;
+      line-height:1;
+    }
+    @media (max-width: 640px){
+      .project-toast{
+        right:14px;
+        left:14px;
+        bottom:14px;
+        width:auto;
+      }
+    }
+    .socials{
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .socials a img{
+      width:54px;
+      height:54px;
+      object-fit:contain;
+      border-radius:14px;
+    }
+
+    .partners-bottom{
+      padding:12px 0 6px;
+    }
+    .partners-card{
+      padding:30px;
+      border-radius:30px;
+      border:1px solid rgba(11,18,32,.08);
+      background:linear-gradient(135deg, rgba(255,255,255,.86), rgba(249,252,255,.96));
+      box-shadow:0 22px 60px rgba(11,18,32,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .partners-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -10% -40% auto;
+      width:420px;
+      height:420px;
+      background:radial-gradient(circle, rgba(201,162,39,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .partners-copy{
+      max-width:78ch;
+      color:var(--muted);
+      line-height:1.8;
+      margin-top:10px;
+    }
+    .partner-row{
+      margin-top:22px;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      padding:18px;
+      border-radius:22px;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.76);
+    }
+    .partner-logo{
+      width:76px;
+      height:76px;
+      object-fit:contain;
+      border-radius:18px;
+      background:white;
+      padding:8px;
+      box-shadow:0 10px 20px rgba(11,18,32,.06);
+    }
+    .partner-name{
+      font-size:18px;
+      font-weight:850;
+      color:var(--gold);
+      margin-bottom:6px;
+    }
+    .partner-note{
+      color:var(--muted);
+      line-height:1.7;
+      max-width:72ch;
+    }
+
+    footer{
+      padding:28px 0 36px;
+      margin-top:20px;
+      border-top:1px solid rgba(11,18,32,.08);
+      background:rgba(255,255,255,.55);
+      color:rgba(11,18,32,.62);
+    }
+    .foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    dialog{
+      border:none;
+      padding:0;
+      width:min(760px, calc(100% - 24px));
+      border-radius:24px;
+      background:rgba(255,255,255,.98);
+      border:1px solid rgba(11,18,32,.10);
+      box-shadow:0 40px 120px rgba(11,18,32,.24);
+    }
+    dialog::backdrop{
+      background:rgba(11,18,32,.35);
+      backdrop-filter:blur(6px);
+    }
+    .modal{
+      display:grid;
+      grid-template-columns:240px 1fr;
+      gap:16px;
+      padding:18px;
+    }
+    @media (max-width: 720px){
+      .modal{ grid-template-columns:1fr; }
+    }
+    .m-img{
+      height:260px;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(11,18,32,.08);
+      background:rgba(11,18,32,.04);
+    }
+    .m-img img{ width:100%; height:100%; object-fit:cover; }
+    .m-top{
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:flex-start;
+    }
+    .x{
+      border:none;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(11,18,32,.06);
+      cursor:pointer;
+      font-weight:700;
+    }
+    .modal p{ color:var(--muted); line-height:1.7; }
+    
+    @media (max-width: 768px){
+      .nav-inner{
+        flex-wrap:wrap;
+      }
+      .nav-left{
+        order:1;
+        width:100%;
+        justify-content:space-between;
+      }
+      .menu{
+        order:2;
+        width:100%;
+        justify-content:center;
+        padding-top:10px;
+        border-top:1px solid var(--stroke);
+        margin-top:10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="nav-left">
+        <button class="lang-btn" id="langToggle" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <span id="langLabel">EN</span>
+        </button>
+        
+        <a class="brand" href="#top" aria-label="Retour en haut">
+          <img src="assets/logo.png" alt="e-NABLE Québec logo" />
+          <div>
+            <strong>e-NABLE Québec</strong>
+            <span>Biomedical Prosthetics</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="menu">
+        <a class="menu-link" href="#work" data-i18n="nav_work">Ce qu'on fait</a>
+
+        <div class="dropdown">
+          <button class="drop-btn" type="button" data-i18n="nav_participate">Participer ▾</button>
+          <div class="drop-panel" aria-label="Menu participer">
+            <a class="drop-item" href="#need-prosthesis">
+              <b data-i18n="drop_need_title">Besoin d'une prothèse</b>
+              <span data-i18n="drop_need_desc">Découvre notre démarche et accède au formulaire de demande.</span>
+            </a>
+            <a class="drop-item" href="#contribute">
+              <b data-i18n="drop_contribute_title">Tu veux y contribuer</b>
+              <span data-i18n="drop_contribute_desc">Rejoins l'équipe comme bénévole, étudiant ou collaborateur technique.</span>
+            </a>
+            <a class="drop-item" href="#support">
+              <b data-i18n="drop_support_title">Tu veux nous soutenir</b>
+              <span data-i18n="drop_support_desc">Appuie notre mission par un don, un partenariat ou un appui matériel.</span>
+            </a>
+            <a class="drop-item" href="#general-inquiry">
+              <b data-i18n="drop_inquiry_title">Demande générale</b>
+              <span data-i18n="drop_inquiry_desc">Pour toute demande générale, redirection ou prise de contact institutionnelle.</span>
+            </a>
+          </div>
+        </div>
+
+        <a class="menu-link" href="#members" data-i18n="nav_members">Membres</a>
+        <a class="menu-link" href="#contact" data-i18n="nav_contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top">
+    <div class="wrap hero">
+      <div class="card hero-left reveal">
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <h1 class="hero-title">
+          <span class="accent">e-NABLE</span><br>
+          Québec
+        </h1>
+
+        <h2 class="hero-subtitle" data-i18n="hero_subtitle">Des prothèses 3D accessibles, conçues avec rigueur, cœur et impact humain.</h2>
+
+        <p class="lead" data-i18n="hero_lead">
+        e-NABLE Québec est une communauté engagée de bénévoles, d'ingénieurs, de cliniciens et de makers, inspirée du réseau international e-NABLE. Nous concevons et fabriquons des prothèses imprimées en 3D accessibles pour les personnes qui en ont besoin, en réunissant innovation ouverte, expertise technique et collaboration humaine au service de solutions concrètes et personnalisées.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn primary" href="#need-prosthesis" data-i18n="hero_cta_request">Faire une demande</a>
+            <a class="btn" href="#contribute" data-i18n="hero_cta_join">Rejoindre l'équipe</a>
+        </div>
+
+        <div class="stats" aria-label="Statistiques">
+          <div class="stat">
+            <b data-count="2">0</b>
+            <span data-i18n="stat_prostheses">Prothèses offertes</span>
+          </div>
+          <div class="stat">
+            <b data-count="7">0</b>
+            <span data-i18n="stat_members">Membres actifs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card hero-media reveal">
+          <img src="assets/carte.jpg" alt="Carte des chapitres e-NABLE" />
+          <div class="hero-badge">
+            <span class="k-dot" aria-hidden="true"></span>
+            <div><strong data-i18n="hero_badge">Réseau international e-NABLE</strong></div>
+          </div>
+        </div>
+
+        <div class="card side-card reveal">
+          <p data-i18n="hero_side_card">Une mission locale, portée par un mouvement mondial. Notre initiative s'inscrit dans le mouvement international e‑NABLE. Nous sommes directement inspirés par leur approche et leurs ressources accessibles en ligne. Pour en savoir plus sur le mouvement global, consultez <a href="[enablingthefuture.org](https://enablingthefuture.org)" target="_blank" style="color:var(--brand); text-decoration:underline;">enablingthefuture.org</a>.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="work">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2 data-i18n="work_title">Ce qu'on fait</h2>
+            <p data-i18n="work_desc">Notre travail se déploie autour de la conception de prothèses accessibles, de la transmission des savoirs et du développement technologique appliqué.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 20l10-16M7 8h10" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 data-i18n="feature1_title">Donations de prothèses</h3>
+            <p data-i18n="feature1_desc">Nous concevons et offrons gratuitement des prothèses de main imprimées en 3D, adaptées aux mesures de chaque utilisateur afin d'améliorer la fonctionnalité, le confort et l'autonomie au quotidien.</p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h16M7 7v12m10-12v12M9 12h6" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 data-i18n="feature2_title">Éducation</h3>
+            <p data-i18n="feature2_desc">Nous partageons nos connaissances en conception assistée par ordinateur, impression 3D, prototypage et ingénierie biomédicale par le biais d'ateliers, de mentorat et d'initiatives de sensibilisation.</p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v6m0 14v-6M4 12h6m10 0h-6" stroke="rgba(11,18,32,.85)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 8a4 4 0 100 8 4 4 0 000-8z" stroke="rgba(11,18,32,.85)" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3 data-i18n="feature3_title">Recherche et développement</h3>
+            <p data-i18n="feature3_desc">Nous développons des solutions mécaniques, électroniques et logicielles afin d'améliorer la précision, l'ergonomie et la performance des dispositifs prosthétiques de nouvelle génération.</p>
+          </article>
+        </div>
+
+        <div style="height:22px"></div>
+
+        <div class="section-title reveal">
+          <div>
+            <h2 data-i18n="gallery_title">Galerie photo</h2>
+            <p data-i18n="gallery_desc">Un aperçu de nos prototypes, de nos essais et du travail de l'équipe sur le terrain.</p>
+          </div>
+        </div>
+
+        <div class="slider reveal" aria-label="Galerie">
+          <div class="track" id="track">
+            <div class="slide">
+              <img src="assets/gallery-1.jpg" alt="Prototype en atelier" />
+              <div class="caption"><div><b data-i18n="slide1_title">Atelier</b><div><span data-i18n="slide1_desc">Prototypage et itérations</span></div></div><span>01</span></div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-2.jpg" alt="Équipe" />
+              <div class="caption"><div><b data-i18n="slide2_title">Équipe</b><div><span data-i18n="slide2_desc">Collaboration interdisciplinaire</span></div></div><span>02</span></div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-3.jpg" alt="Test fonctionnel" />
+              <div class="caption"><div><b data-i18n="slide3_title">Tests</b><div><span data-i18n="slide3_desc">Mesures et validation</span></div></div><span>03</span></div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-4.jpg" alt="Prototype" />
+              <div class="caption"><div><b data-i18n="slide4_title">Prototype</b><div><span data-i18n="slide4_desc">Design et ajustements</span></div></div><span>04</span></div>
+            </div>
+            <div class="slide">
+              <img src="assets/gallery-5.jpg" alt="Assemblage de prototype" />
+              <div class="caption"><div><b data-i18n="slide5_title">Assemblage</b><div><span data-i18n="slide5_desc">Finition et adaptation</span></div></div><span>05</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slider-controls reveal">
+          <button class="btn" id="prev" type="button" data-i18n="slider_prev">Précédent</button>
+          <button class="btn" id="next" type="button" data-i18n="slider_next">Suivant</button>
+          <div class="dots" id="dots" aria-label="Indicateurs"></div>
+          <span class="pill" data-i18n="slider_auto">Défilement automatique</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="participate">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2 data-i18n="participate_title">Participer</h2>
+            <p data-i18n="participate_desc">Les anciennes pages séparées ont été intégrées ici en sections internes sur une seule page.</p>
+          </div>
+        </div>
+
+        <div class="participate-grid">
+          <article class="entry-card reveal" id="need-prosthesis">
+            <h3 data-i18n="entry1_title">Besoin d'une prothèse</h3>
+            <p data-i18n="entry1_desc">Découvrez notre approche, le déroulement d'une demande et le lien officiel pour soumettre un cas.</p>
+            <div class="entry-actions">
+              <a class="btn primary" href="[docs.google.com](https://docs.google.com/forms/d/e/1FAIpQLSexEJH8fGnrgljyOsXq9EgrNGrG5YI7qKS0Sa-sKWFJ0yG4bA/viewform?usp=publish-editor)" target="_blank" rel="noreferrer" data-i18n="entry1_btn">Formulaire de demande</a>
+            </div>
+          </article>
+
+          <article class="entry-card reveal" id="contribute">
+            <h3 data-i18n="entry2_title">Tu veux y contribuer</h3>
+            <p data-i18n="entry2_desc">Rejoignez l'équipe comme bénévole, étudiant ou collaborateur technique et participez à notre mission.</p>
+            <div class="entry-actions">
+              <a class="btn primary" href="[docs.google.com](https://docs.google.com/forms/d/e/1FAIpQLSexEJH8fGnrgljyOsXq9EgrNGrG5YI7qKS0Sa-sKWFJ0yG4bA/viewform?usp=publish-editor)" target="_blank" rel="noreferrer" data-i18n="entry2_btn">Formulaire candidature</a>
+            </div>
+          </article>
+
+          <article class="entry-card reveal" id="support">
+            <h3 data-i18n="entry3_title">Tu veux nous soutenir</h3>
+            <p data-i18n="entry3_desc">Appuyez notre mission par un don, un partenariat, une contribution matérielle ou un soutien logistique.</p>
+            <div class="entry-actions">
+              <a class="btn primary" href="#donation" data-i18n="entry3_btn1">Aller à la section don</a>
+              <a class="btn" href="#partners" data-i18n="entry3_btn2">Voir les partenaires</a>
+            </div>
+          </article>
+
+          <article class="entry-card reveal" id="general-inquiry">
+            <h3 data-i18n="entry4_title">Demande générale</h3>
+            <p data-i18n="entry4_desc">Pour toute demande générale, redirection, collaboration institutionnelle ou prise de contact média.</p>
+            <div class="entry-actions">
+              <a class="btn primary" href="#contact" data-i18n="entry4_btn">Nous contacter</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="members">
+      <div class="wrap">
+        <div class="section-title reveal">
+          <div>
+            <h2 data-i18n="members_title">Notre équipe</h2>
+            <p data-i18n="members_desc">Cette initiative existe grâce à l'engagement de membres bénévoles qui donnent leur temps, leurs compétences et leur énergie à une mission collective.</p>
+          </div>
+        </div>
+
+        <div class="toolbar reveal">
+          <input class="input" id="search" data-i18n-placeholder="members_search" placeholder="Rechercher un membre (nom, rôle) ..." />
+          <div class="chips" id="chips"></div>
+        </div>
+
+        <div class="members reveal" id="memberGrid" aria-label="Membres"></div>
+      </div>
+    </section>
+
+    <section id="donation">
+      <div class="wrap">
+        <div class="don-card reveal">
+          <div class="don-glow" aria-hidden="true"></div>
+          <div class="don-content">
+            <h2 class="don-title" data-i18n="donation_title">Faire un don</h2>
+            <p class="don-text" data-i18n="donation_desc">Chaque contribution aide à imprimer, assembler et adapter des prothèses de main en 3D pour des personnes qui en ont besoin. Vous soutenez directement les matériaux, les ajustements, les essais et la rapidité de déploiement de nos solutions.</p>
+            <div class="don-actions">
+              <a class="btn primary" href="[gofundme.com](https://www.gofundme.com/fr-ca)" target="_blank" rel="noreferrer" data-i18n="donation_btn">Je donne maintenant</a>
+              <a class="don-link" href="#contact" data-i18n="donation_link">Une question avant de contribuer ?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap contact-wrap">
+        <div class="card contact-card reveal">
+          <h2 data-i18n="contact_title">Contact</h2>
+          <p data-i18n="contact_desc">Une question, une collaboration, un partenariat ou une demande de prothèse ? Écris-nous et nous te répondrons dans les meilleurs délais.</p>
+
+          <div style="height:18px"></div>
+          <b data-i18n="contact_email">Courriel</b>
+          <div style="height:8px"></div>
+          <a class="btn primary" href="mailto:e.nable.quebec@gmail.com">e.nable.quebec@gmail.com</a>
+
+          <div style="height:18px"></div>
+          <b data-i18n="contact_phone">Téléphone</b>
+          <div style="height:8px"></div>
+          <a class="btn" href="tel:+15142941064">514-294-1064</a>
+
+          <div style="height:22px"></div>
+          <b data-i18n="contact_social">Réseaux sociaux</b>
+          <div class="socials">
+            <a href="[instagram.com](https://www.instagram.com/e_nable.quebec/)" target="_blank" rel="noreferrer"><img src="assets/Instagram.jpg" alt="Instagram"></a>
+            <a href="[facebook.com](https://www.facebook.com/profile.php?id=61586707352821)" target="_blank" rel="noreferrer"><img src="assets/Facebook.png" alt="Facebook"></a>
+            <a href="[linkedin.com](http://linkedin.com/company/e-nable-québec)" target="_blank" rel="noreferrer"><img src="assets/Linkedin.jpg" alt="LinkedIn"></a>
+            <a href="lien youtube" target="_blank" rel="noreferrer"><img src="assets/Youtube.jpg" alt="YouTube"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners-bottom" id="partners">
+      <div class="wrap">
+        <div class="partners-card reveal">
+          <div class="section-title" style="margin-bottom:0">
+            <div>
+              <h2 data-i18n="partners_title">Nos partenaires</h2>
+            </div>
+          </div>
+
+          <p class="partners-copy" data-i18n="partners_desc">
+            Nous remercions sincèrement nos partenaires pour leur confiance et leur soutien. Leur engagement contribue directement à rendre nos projets possibles, à renforcer notre capacité d'action et à offrir des solutions prosthétiques accessibles à davantage de personnes. Leur appui représente bien plus qu'un accompagnement technique ou matériel, il constitue un véritable levier d'impact humain et social.
+          </p>
+
+          <div class="partner-row">
+            <img class="partner-logo" src="assets/partenaire1.jpg" alt="Logo Yan-tastik impression 3D" />
+            <div>
+              <div class="partner-name">Yan-tastik impression 3D</div>
+              <div class="partner-note" data-i18n="partner1_desc">Entreprise québécoise qui soutient e-NABLE Québec par son expertise, l'accès à un parc d'imprimantes et un accompagnement technique essentiel à la concrétisation de nos solutions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex; gap:12px; align-items:center;">
+        <img src="assets/logo.png" alt="logo" style="width:46px;height:46px;padding:6px" />
+        <div>
+          <div><b style="color:rgba(11,18,32,.86)">e-NABLE Québec</b></div>
+          <div style="font-size:12px">Biomedical Prosthetics</div>
+        </div>
+      </div>
+      <div style="font-size:12px">© <span id="year"></span> e-NABLE Québec</div>
+    </div>
+  </footer>
+
+  <dialog id="modal">
+    <div class="modal">
+      <div class="m-img"><img id="mPhoto" alt="Photo membre" /></div>
+      <div>
+        <div class="m-top">
+          <div>
+            <h3 id="mName" style="margin:0"></h3>
+            <div id="mRole" style="color:rgba(11,18,32,.75);margin-top:4px"></div>
+          </div>
+          <button class="x" id="close" type="button" data-i18n="modal_close">Fermer</button>
+        </div>
+        <div style="height:10px"></div>
+        <p id="mBio"></p>
+        <div style="height:12px"></div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" id="mLink" href="#" target="_blank" rel="noreferrer" data-i18n="modal_link">Lien</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // ==================== SYSTÈME i18n ====================
+    const translations = {
+      fr: {
+        // Navigation
+        nav_work: "Ce qu'on fait",
+        nav_participate: "Participer ▾",
+        nav_members: "Membres",
+        nav_contact: "Contact",
+        
+        // Dropdown
+        drop_need_title: "Besoin d'une prothèse",
+        drop_need_desc: "Découvre notre démarche et accède au formulaire de demande.",
+        drop_contribute_title: "Tu veux y contribuer",
+        drop_contribute_desc: "Rejoins l'équipe comme bénévole, étudiant ou collaborateur technique.",
+        drop_support_title: "Tu veux nous soutenir",
+        drop_support_desc: "Appuie notre mission par un don, un partenariat ou un appui matériel.",
+        drop_inquiry_title: "Demande générale",
+        drop_inquiry_desc: "Pour toute demande générale, redirection ou prise de contact institutionnelle.",
+        
+        // Hero
+        hero_subtitle: "Des prothèses 3D accessibles, conçues avec rigueur, cœur et impact humain.",
+        hero_lead: "e-NABLE Québec est une communauté engagée de bénévoles, d'ingénieurs, de cliniciens et de makers, inspirée du réseau international e-NABLE. Nous concevons et fabriquons des prothèses imprimées en 3D accessibles pour les personnes qui en ont besoin, en réunissant innovation ouverte, expertise technique et collaboration humaine au service de solutions concrètes et personnalisées.",
+        hero_cta_request: "Faire une demande",
+        hero_cta_join: "Rejoindre l'équipe",
+        stat_prostheses: "Prothèses offertes",
+        stat_members: "Membres actifs",
+        hero_badge: "Réseau international e-NABLE",
+        hero_side_card: 'Une mission locale, portée par un mouvement mondial. Notre initiative s\'inscrit dans le mouvement international e‑NABLE. Nous sommes directement inspirés par leur approche et leurs ressources accessibles en ligne. Pour en savoir plus sur le mouvement global, consultez <a href="[enablingthefuture.org](https://enablingthefuture.org)" target="_blank" style="color:var(--brand); text-decoration:underline;">enablingthefuture.org</a>.',
+        
+        // Work section
+        work_title: "Ce qu'on fait",
+        work_desc: "Notre travail se déploie autour de la conception de prothèses accessibles, de la transmission des savoirs et du développement technologique appliqué.",
+        feature1_title: "Donations de prothèses",
+        feature1_desc: "Nous concevons et offrons gratuitement des prothèses de main imprimées en 3D, adaptées aux mesures de chaque utilisateur afin d'améliorer la fonctionnalité, le confort et l'autonomie au quotidien.",
+        feature2_title: "Éducation",
+        feature2_desc: "Nous partageons nos connaissances en conception assistée par ordinateur, impression 3D, prototypage et ingénierie biomédicale par le biais d'ateliers, de mentorat et d'initiatives de sensibilisation.",
+        feature3_title: "Recherche et développement",
+        feature3_desc: "Nous développons des solutions mécaniques, électroniques et logicielles afin d'améliorer la précision, l'ergonomie et la performance des dispositifs prosthétiques de nouvelle génération.",
+        
+        // Gallery
+        gallery_title: "Galerie photo",
+        gallery_desc: "Un aperçu de nos prototypes, de nos essais et du travail de l'équipe sur le terrain.",
+        slide1_title: "Atelier",
+        slide1_desc: "Prototypage et itérations",
+        slide2_title: "Équipe",
+        slide2_desc: "Collaboration interdisciplinaire",
+        slide3_title: "Tests",
+        slide3_desc: "Mesures et validation",
+        slide4_title: "Prototype",
+        slide4_desc: "Design et ajustements",
+        slide5_title: "Assemblage",
+        slide5_desc: "Finition et adaptation",
+        slider_prev: "Précédent",
+        slider_next: "Suivant",
+        slider_auto: "Défilement automatique",
+        
+        // Participate
+        participate_title: "Participer",
+        participate_desc: "Les anciennes pages séparées ont été intégrées ici en sections internes sur une seule page.",
+        entry1_title: "Besoin d'une prothèse",
+        entry1_desc: "Découvrez notre approche, le déroulement d'une demande et le lien officiel pour soumettre un cas.",
+        entry1_btn: "Formulaire de demande",
+        entry2_title: "Tu veux y contribuer",
+        entry2_desc: "Rejoignez l'équipe comme bénévole, étudiant ou collaborateur technique et participez à notre mission.",
+        entry2_btn: "Formulaire candidature",
+        entry3_title: "Tu veux nous soutenir",
+        entry3_desc: "Appuyez notre mission par un don, un partenariat, une contribution matérielle ou un soutien logistique.",
+        entry3_btn1: "Aller à la section don",
+        entry3_btn2: "Voir les partenaires",
+        entry4_title: "Demande générale",
+        entry4_desc: "Pour toute demande générale, redirection, collaboration institutionnelle ou prise de contact média.",
+        entry4_btn: "Nous contacter",
+        
+        // Members
+        members_title: "Notre équipe",
+        members_desc: "Cette initiative existe grâce à l'engagement de membres bénévoles qui donnent leur temps, leurs compétences et leur énergie à une mission collective.",
+        members_search: "Rechercher un membre (nom, rôle) ...",
+        members_all: "Tous",
+        members_volunteer: "Membre bénévole",
+        members_hours: "heures",
+        members_volunteer_hours: "Heures bénévoles",
+        
+        // Donation
+        donation_title: "Faire un don",
+        donation_desc: "Chaque contribution aide à imprimer, assembler et adapter des prothèses de main en 3D pour des personnes qui en ont besoin. Vous soutenez directement les matériaux, les ajustements, les essais et la rapidité de déploiement de nos solutions.",
+        donation_btn: "Je donne maintenant",
+        donation_link: "Une question avant de contribuer ?",
+        
+        // Contact
+        contact_title: "Contact",
+        contact_desc: "Une question, une collaboration, un partenariat ou une demande de prothèse ? Écris-nous et nous te répondrons dans les meilleurs délais.",
+        contact_email: "Courriel",
+        contact_phone: "Téléphone",
+        contact_social: "Réseaux sociaux",
+        
+        // Partners
+        partners_title: "Nos partenaires",
+        partners_desc: "Nous remercions sincèrement nos partenaires pour leur confiance et leur soutien. Leur engagement contribue directement à rendre nos projets possibles, à renforcer notre capacité d'action et à offrir des solutions prosthétiques accessibles à davantage de personnes. Leur appui représente bien plus qu'un accompagnement technique ou matériel, il constitue un véritable levier d'impact humain et social.",
+        partner1_desc: "Entreprise québécoise qui soutient e-NABLE Québec par son expertise, l'accès à un parc d'imprimantes et un accompagnement technique essentiel à la concrétisation de nos solutions.",
+        
+        // Modal
+        modal_close: "Fermer",
+        modal_link: "Lien",
+        modal_add_link: "Ajouter un lien",
+        
+        // Member bios
+        member_bio_default: "Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre."
+      },
+      
+      en: {
+        // Navigation
+        nav_work: "What We Do",
+        nav_participate: "Get Involved ▾",
+        nav_members: "Members",
+        nav_contact: "Contact",
+        
+        // Dropdown
+        drop_need_title: "Need a Prosthesis",
+        drop_need_desc: "Learn about our process and access the request form.",
+        drop_contribute_title: "Want to Contribute",
+        drop_contribute_desc: "Join the team as a volunteer, student, or technical collaborator.",
+        drop_support_title: "Want to Support Us",
+        drop_support_desc: "Support our mission through donations, partnerships, or material contributions.",
+        drop_inquiry_title: "General Inquiry",
+        drop_inquiry_desc: "For any general inquiries, redirections, or institutional contacts.",
+        
+        // Hero
+        hero_subtitle: "Accessible 3D prostheses, designed with precision, heart, and human impact.",
+        hero_lead: "e-NABLE Québec is a committed community of volunteers, engineers, clinicians, and makers, inspired by the international e-NABLE network. We design and manufacture accessible 3D-printed prostheses for people in need, bringing together open innovation, technical expertise, and human collaboration to deliver concrete, personalized solutions.",
+        hero_cta_request: "Make a Request",
+        hero_cta_join: "Join the Team",
+        stat_prostheses: "Prostheses donated",
+        stat_members: "Active members",
+        hero_badge: "International e-NABLE Network",
+        hero_side_card: 'A local mission, carried by a global movement. Our initiative is part of the international e‑NABLE movement. We are directly inspired by their approach and their accessible online resources. To learn more about the global movement, visit <a href="[enablingthefuture.org](https://enablingthefuture.org)" target="_blank" style="color:var(--brand); text-decoration:underline;">enablingthefuture.org</a>.',
+        
+        // Work section
+        work_title: "What We Do",
+        work_desc: "Our work revolves around designing accessible prostheses, sharing knowledge, and applied technological development.",
+        feature1_title: "Prosthesis Donations",
+        feature1_desc: "We design and freely provide 3D-printed hand prostheses, adapted to each user's measurements to improve functionality, comfort, and daily autonomy.",
+        feature2_title: "Education",
+        feature2_desc: "We share our knowledge in computer-aided design, 3D printing, prototyping, and biomedical engineering through workshops, mentoring, and outreach initiatives.",
+        feature3_title: "Research & Development",
+        feature3_desc: "We develop mechanical, electronic, and software solutions to improve the precision, ergonomics, and performance of next-generation prosthetic devices.",
+        
+        // Gallery
+        gallery_title: "Photo Gallery",
+        gallery_desc: "A glimpse of our prototypes, trials, and the team's work in the field.",
+        slide1_title: "Workshop",
+        slide1_desc: "Prototyping and iterations",
+        slide2_title: "Team",
+        slide2_desc: "Interdisciplinary collaboration",
+        slide3_title: "Testing",
+        slide3_desc: "Measurements and validation",
+        slide4_title: "Prototype",
+        slide4_desc: "Design and adjustments",
+        slide5_title: "Assembly",
+        slide5_desc: "Finishing and adaptation",
+        slider_prev: "Previous",
+        slider_next: "Next",
+        slider_auto: "Auto-scroll",
+        
+        // Participate
+        participate_title: "Get Involved",
+        participate_desc: "The former separate pages have been integrated here as internal sections on a single page.",
+        entry1_title: "Need a Prosthesis",
+        entry1_desc: "Discover our approach, the request process, and the official link to submit a case.",
+        entry1_btn: "Request Form",
+        entry2_title: "Want to Contribute",
+        entry2_desc: "Join the team as a volunteer, student, or technical collaborator and participate in our mission.",
+        entry2_btn: "Application Form",
+        entry3_title: "Want to Support Us",
+        entry3_desc: "Support our mission through donations, partnerships, material contributions, or logistical support.",
+        entry3_btn1: "Go to Donation Section",
+        entry3_btn2: "See Partners",
+        entry4_title: "General Inquiry",
+        entry4_desc: "For any general inquiries, redirections, institutional collaborations, or media contacts.",
+        entry4_btn: "Contact Us",
+        
+        // Members
+        members_title: "Our Team",
+        members_desc: "This initiative exists thanks to the commitment of volunteer members who give their time, skills, and energy to a collective mission.",
+        members_search: "Search for a member (name, role) ...",
+        members_all: "All",
+        members_volunteer: "Volunteer Member",
+        members_hours: "hours",
+        members_volunteer_hours: "Volunteer hours",
+        
+        // Donation
+        donation_title: "Make a Donation",
+        donation_desc: "Every contribution helps print, assemble, and adapt 3D hand prostheses for people in need. You directly support materials, adjustments, testing, and the speed of deployment of our solutions.",
+        donation_btn: "Donate Now",
+        donation_link: "A question before contributing?",
+        
+        // Contact
+        contact_title: "Contact",
+        contact_desc: "A question, a collaboration, a partnership, or a prosthesis request? Write to us and we'll get back to you as soon as possible.",
+        contact_email: "Email",
+        contact_phone: "Phone",
+        contact_social: "Social Media",
+        
+        // Partners
+        partners_title: "Our Partners",
+        partners_desc: "We sincerely thank our partners for their trust and support. Their commitment directly contributes to making our projects possible, strengthening our capacity for action, and offering accessible prosthetic solutions to more people. Their support represents much more than technical or material accompaniment; it constitutes a real lever for human and social impact.",
+        partner1_desc: "A Quebec company that supports e-NABLE Québec through its expertise, access to a fleet of printers, and technical support essential to the realization of our solutions.",
+        
+        // Modal
+        modal_close: "Close",
+        modal_link: "Link",
+        modal_add_link: "Add a link",
+        
+        // Member bios
+        member_bio_default: "Add a short professional bio here presenting the member's role, interests, and contribution."
+      }
+    };
+
+    let currentLang = localStorage.getItem('lang') || 'fr';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('lang', lang);
+      document.documentElement.lang = lang;
+      
+      // Update lang button
+      const langLabel = document.getElementById('langLabel');
+      langLabel.textContent = lang === 'fr' ? 'EN' : 'FR';
+      
+      // Update all elements with data-i18n attribute
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerHTML = translations[lang][key];
+        }
+      });
+      
+      // Update placeholders
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+          el.placeholder = translations[lang][key];
+        }
+      });
+      
+      // Re-render members with new language
+      renderChips();
+      renderMembers();
+    }
+
+    // ==================== UTILITAIRES ====================
+    const $ = (q, el=document) => el.querySelector(q);
+    const $$ = (q, el=document) => Array.from(el.querySelectorAll(q));
+
+    $("#year").textContent = new Date().getFullYear();
+
+    // ==================== ANIMATIONS REVEAL ====================
+    const io = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting) e.target.classList.add("on");
+      }
+    }, { threshold: 0.12 });
+    $$(".reveal").forEach(el => io.observe(el));
+
+    // ==================== COMPTEURS ANIMÉS ====================
+    const counters = $$("[data-count]");
+    const animateCounter = (el) => {
+      const target = Number(el.dataset.count || 0);
+      const start = performance.now();
+      const duration = 1000;
+      const tick = (now) => {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if(p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const counterIO = new IntersectionObserver((entries)=>{
+      for(const e of entries){
+        if(e.isIntersecting){
+          animateCounter(e.target);
+          counterIO.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.65 });
+    counters.forEach(el => counterIO.observe(el));
+
+    // ==================== NAVIGATION SCROLL ====================
+    const offsetScrollToHash = (hash, pushState = false) => {
+      if(!hash || !hash.startsWith("#")) return;
+      const target = document.querySelector(hash);
+      if(!target) return;
+      const nav = document.querySelector(".nav");
+      const navHeight = nav ? nav.offsetHeight : 0;
+      const extraOffset = 28;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - extraOffset;
+      window.scrollTo({ top, behavior: "smooth" });
+      if(pushState) history.pushState(null, "", hash);
+    };
+
+    document.addEventListener("click", (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if(!link) return;
+      const href = link.getAttribute("href");
+      if(!href || href === "#") return;
+      const target = document.querySelector(href);
+      if(!target) return;
+      e.preventDefault();
+      offsetScrollToHash(href, true);
+    });
+
+    window.addEventListener("load", () => {
+      if(window.location.hash){
+        setTimeout(() => offsetScrollToHash(window.location.hash, false), 80);
+      }
+    });
+
+    // ==================== SLIDER ====================
+    const track = $("#track");
+    const slides = $$(".slide", track);
+    const dots = $("#dots");
+    let idx = 0;
+
+    slides.forEach((_, i) => {
+      const d = document.createElement("button");
+      d.type = "button";
+      d.className = "s-dot" + (i === 0 ? " active" : "");
+      d.setAttribute("aria-label", `Aller à l'image ${i + 1}`);
+      d.addEventListener("click", () => go(i, true));
+      dots.appendChild(d);
+    });
+
+    const setDots = () => {
+      $$(".s-dot", dots).forEach((d, i) => d.classList.toggle("active", i === idx));
+    };
+
+    const go = (i, manual = false) => {
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-idx * 100}%)`;
+      setDots();
+      if(manual) resetAuto();
+    };
+
+    $("#prev").addEventListener("click", () => go(idx - 1, true));
+    $("#next").addEventListener("click", () => go(idx + 1, true));
+
+    let auto = null;
+    const startAuto = () => auto = setInterval(() => go(idx + 1), 4300);
+    const resetAuto = () => { clearInterval(auto); startAuto(); };
+    startAuto();
+
+    // ==================== MEMBRES ====================
+    const members = [
+      { name:"Aymen Zire", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" },
+      { name:"Anderson Sato", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" },
+      { name:"Nour Yazji", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" },
+      { name:"Yacine Mahdid", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" },
+      { name:"Haguy Mafandala", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" },
+      { name:"Yannick Lefebvre", role_fr:"Membre bénévole", role_en:"Volunteer Member", hours:0, bio_fr:"Ajoute ici une courte bio professionnelle présentant le rôle, les intérêts et la contribution du membre.", bio_en:"Add a short professional bio here presenting the member's role, interests, and contribution.", photo:"assets/member.jpg", link:"#" }
+    ];
+
+    const getRole = (m) => currentLang === 'fr' ? m.role_fr : m.role_en;
+    const getBio = (m) => currentLang === 'fr' ? m.bio_fr : m.bio_en;
+
+    const chips = $("#chips");
+    const memberGrid = $("#memberGrid");
+    const modal = $("#modal");
+    const search = $("#search");
+    let activeTeam = currentLang === 'fr' ? "Tous" : "All";
+
+    const getTeams = () => {
+      const allLabel = translations[currentLang].members_all;
+      const roles = Array.from(new Set(members.map(m => getRole(m))));
+      return [allLabel, ...roles];
+    };
+
+    const openMember = (m) => {
+      const hoursLabel = translations[currentLang].members_volunteer_hours;
+      $("#mPhoto").src = m.photo;
+      $("#mPhoto").alt = `Photo de ${m.name}`;
+      $("#mName").textContent = m.name;
+      $("#mRole").textContent = getRole(m);
+      $("#mBio").textContent = getBio(m) + `\n\n${hoursLabel} : ${m.hours}`;
+      const link = $("#mLink");
+      link.href = m.link || "#";
+      link.textContent = (m.link && m.link !== "#") ? translations[currentLang].modal_link : translations[currentLang].modal_add_link;
+      modal.showModal();
+    };
+
+    $("#close").addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (e) => {
+      const rect = modal.getBoundingClientRect();
+      const inDialog = (
+        e.clientX >= rect.left && e.clientX <= rect.right &&
+        e.clientY >= rect.top && e.clientY <= rect.bottom
+      );
+      if(!inDialog) modal.close();
+    });
+
+    const renderChips = () => {
+      const teams = getTeams();
+      const allLabel = translations[currentLang].members_all;
+      
+      // Update activeTeam if it doesn't exist in current language
+      if (!teams.includes(activeTeam)) {
+        activeTeam = allLabel;
+      }
+      
+      chips.innerHTML = "";
+      teams.forEach(team => {
+        const btn = document.createElement("button");
+        btn.className = "chip" + (team === activeTeam ? " active" : "");
+        btn.type = "button";
+        btn.textContent = team;
+        btn.addEventListener("click", () => {
+          activeTeam = team;
+          renderChips();
+          renderMembers();
+        });
+        chips.appendChild(btn);
+      });
+    };
+
+    const renderMembers = () => {
+      const query = (search.value || "").toLowerCase().trim();
+      const allLabel = translations[currentLang].members_all;
+      const hoursLabel = translations[currentLang].members_hours;
+      
+      memberGrid.innerHTML = "";
+
+      const filtered = members.filter(m => {
+        const role = getRole(m);
+        const teamOk = activeTeam === allLabel || role === activeTeam;
+        const text = `${m.name} ${role} ${getBio(m)}`.toLowerCase();
+        const searchOk = !query || text.includes(query);
+        return teamOk && searchOk;
+      });
+
+      filtered.forEach((m) => {
+        const el = document.createElement("article");
+        el.className = "member";
+        el.innerHTML = `
+          <div class="avatar"><img src="${m.photo}" alt="Portrait ${m.name}" /></div>
+          <b>${m.name}</b>
+          <small>${getRole(m)}</small>
+          <small>${m.hours} ${hoursLabel}</small>
+        `;
+        el.addEventListener("click", () => openMember(m));
+        memberGrid.appendChild(el);
+      });
+    };
+
+    search.addEventListener("input", renderMembers);
+
+    // ==================== BOUTON LANGUE ====================
+    $("#langToggle").addEventListener("click", () => {
+      const newLang = currentLang === 'fr' ? 'en' : 'fr';
+      setLanguage(newLang);
+    });
+
+    // ==================== INITIALISATION ====================
+    setLanguage(currentLang);
+  </script>
+</body>
+</html>
