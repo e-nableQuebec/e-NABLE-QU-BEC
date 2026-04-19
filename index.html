@@ -113,21 +113,42 @@
     @media (max-width: 860px) { .hero-layout { grid-template-columns: 1fr; } }
 
     h1.hero-title {
-      font-family: 'Instrument Serif', Georgia, serif;
+
       font-size: clamp(44px, 6vw, 72px);
       line-height: 1.02;
       letter-spacing: -.5px;
       color: var(--navy);
       margin-bottom: 20px;
-      max-width: 11ch;
+
     }
     h1.hero-title .ename {
       display: block;
       color: var(--navy);
+
     }
     h1.hero-title em { font-style: italic; color: var(--blue); }
 
+
+
+    h2.hero-subtitle {
+
+    line-height: 1.02;
+    letter-spacing: -.5px;
+    color: var(--navy);
+    margin-bottom: 20px;
+
+    }
+    h2.hero-subtitle .ename {
+    display: block;
+    color: var(--navy);
+
+    }
+    h2.hero-subtitle em { font-style: italic; color: var(--blue); }
+
+
+
     .hero-desc {
+      
       font-size: 16px; line-height: 1.75;
       color: var(--text-muted); max-width: 52ch; margin-bottom: 32px;
     }
@@ -513,11 +534,13 @@
     <div class="wrap hero-layout">
       <div class="reveal">
         <h1 class="hero-title" data-i18n="hero_title_html"><span class="ename">e-NABLE Québec</span>Des prothèses <em>3D</em> accessibles, pensées avec cœur.</h1>
+        <h2 class="hero-subtitle" data-i18n="hero_subtitle_html"> Des prothèses <em>3D</em> accessibles, pensées avec cœur.</h2>
         <p class="hero-desc" data-i18n="hero_lead">e-NABLE Québec est avant tout une communauté bénévole et solidaire. Nous rassemblons des personnes prêtes à apprendre, créer, ajuster et aider, afin d'offrir des prothèses imprimées en 3D accessibles à ceux et celles qui en ont besoin. L'expertise technique et clinique peut soutenir cette mission, mais c'est d'abord l'engagement humain qui la fait vivre.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#need-prosthesis" data-i18n="hero_cta_request">Faire une demande</a>
           <a class="btn btn-ghost" href="#contribute" data-i18n="hero_cta_join">Rejoindre l'équipe</a>
         </div>
+        <!--
         <div class="hero-stats">
           <div class="stat-item">
             <b data-count="2">0</b>
@@ -528,6 +551,8 @@
             <span data-i18n="stat_members">Membres actifs</span>
           </div>
         </div>
+        -->
+
       </div>
       <div class="reveal" style="transition-delay:.15s;">
         <div class="hero-image-wrap">
@@ -556,7 +581,7 @@
           <article class="feature">
             <div class="feature-icon"><img src="assets/education.png" alt=""></div>
             <h3 data-i18n="feature2_title">Transmission</h3>
-            <p data-i18n="feature2_desc">Nous partageons nos méthodes, nos outils et notre expérience en impression 3D, en conception et en fabrication à travers l'entraide, les ateliers et le mentorat.</p>
+            <p data-i18n="feature2_desc">Nous partageons nos méthodes, nos outils et notre expérience en impression 3D, en conception et en fabrication à travers des ateliers éducatifs et par le partage de nos connaissances sur nos réseaux.</p>
           </article>
           <article class="feature">
             <div class="feature-icon"><img src="assets/recherche.png" alt=""></div>
@@ -574,8 +599,8 @@
                 <div class="gallery-slide"><img src="assets/gallery-1.jpg" alt=""></div>
                 <div class="gallery-slide"><img src="assets/gallery-2.jpg" alt=""></div>
                 <div class="gallery-slide"><img src="assets/gallery-3.jpg" alt=""></div>
-                <div class="gallery-slide"><img src="assets/gallery-4.jpg" alt=""></div>
-                <div class="gallery-slide"><img src="assets/gallery-5.jpg" alt=""></div>
+
+
               </div>
             </div>
 
@@ -595,8 +620,9 @@
           <article class="part-card reveal" id="need-prosthesis">
             <h3 data-i18n="entry1_title">Besoin d'une prothèse</h3>
             <p data-i18n="entry1_desc">Découvrez notre démarche, la façon dont nous accompagnons les demandes et le lien officiel pour soumettre un cas.</p>
-            <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSexEJH8fGnrgljyOsXq9EgrNGrG5YI7qKS0Sa-sKWFJ0yG4bA/viewform?usp=publish-editor" target="_blank" rel="noreferrer" data-i18n="entry1_btn">Formulaire de demande</a>
+            <a class="btn btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc4bU2cQGb9Tn8VQmjnvEtpeQkQhppRwKhGojTVbGLS5N5QBw/viewform?usp=embed_facebook" target="_blank" rel="noreferrer" data-i18n="entry1_btn">Formulaire de demande</a>
           </article>
+          
           <article class="part-card reveal" id="contribute">
             <h3 data-i18n="entry2_title">Tu veux y contribuer</h3>
             <p data-i18n="entry2_desc">Rejoins une équipe bénévole motivée où chacun peut apprendre, aider et contribuer concrètement, avec ou sans parcours technique avancé.</p>
@@ -605,7 +631,7 @@
           <article class="part-card reveal" id="support">
             <h3 data-i18n="entry3_title">Tu veux nous soutenir</h3>
             <p data-i18n="entry3_desc">Chaque don aide directement à acheter du matériel, à fabriquer les prothèses et à soutenir une initiative portée par des bénévoles.</p>
-            <a class="btn btn-primary" href="https://www.gofundme.com/fr-ca" target="_blank" rel="noreferrer" data-i18n="entry3_btn1">Je donne maintenant</a>
+            <a class="btn btn-primary" target="_blank" rel="noreferrer" data-i18n="entry3_btn1">Je donne maintenant</a>
           </article>
         </div>
       </div>
@@ -659,7 +685,7 @@
                   <a class="social-link" href="https://www.instagram.com/e_nable.quebec/" target="_blank" rel="noreferrer"><img src="assets/Instagram.jpg" alt="Instagram"></a>
                   <a class="social-link" href="https://www.facebook.com/profile.php?id=61586707352821" target="_blank" rel="noreferrer"><img src="assets/Facebook.png" alt="Facebook"></a>
                   <a class="social-link" href="http://linkedin.com/company/e-nable-québec" target="_blank" rel="noreferrer"><img src="assets/Linkedin.jpg" alt="LinkedIn"></a>
-                  <a class="social-link" href="#" target="_blank" rel="noreferrer"><img src="assets/Youtube.jpg" alt="YouTube"></a>
+
                 </div>
               </div>
             </div>
@@ -713,7 +739,7 @@
         </div>
         <p id="mBio"></p>
         <div class="modal-footer">
-          <a class="btn btn-ghost" id="mLink" href="#" target="_blank" rel="noreferrer" data-i18n="modal_link">Lien</a>
+          <a class="btn btn-ghost" id="mLink" href="#" target="_blank" rel="noreferrer" data-i18n="modal_link">Lien Linkedin</a>
         </div>
       </div>
     </div>
@@ -732,7 +758,8 @@
         drop_contribute_desc:"Rejoins l'équipe comme bénévole, étudiant ou collaborateur technique.",
         drop_support_title:"Faire un don",
         drop_support_desc:"Appuie notre mission par un don.",
-        hero_title_html:'<span class="ename">e-NABLE Québec</span>Des prothèses <em>3D</em> accessibles, pensées avec cœur.',
+        hero_title_html:'<span class="ename">e-NABLE Québec</span>',
+        hero_subtitle_html:'<span class="ename_subtitle">Des prothèses <em>3D</em> accessibles, pensées avec cœur.</span>',
         hero_lead:"e-NABLE Québec est avant tout une communauté bénévole et solidaire. Nous rassemblons des personnes prêtes à apprendre, créer, ajuster et aider, afin d'offrir des prothèses imprimées en 3D accessibles à ceux et celles qui en ont besoin. L'expertise technique et clinique peut soutenir cette mission, mais c'est d'abord l'engagement humain qui la fait vivre.",
         hero_cta_request:"Faire une demande",
         hero_cta_join:"Rejoindre l'équipe",
@@ -746,7 +773,7 @@
         feature1_title:"Prothèses solidaires",
         feature1_desc:"Nous fabriquons et adaptons des prothèses de main imprimées en 3D, offertes gratuitement selon les besoins de chaque personne accompagnée.",
         feature2_title:"Transmission",
-        feature2_desc:"Nous partageons nos méthodes, nos outils et notre expérience en impression 3D, en conception et en fabrication à travers l'entraide, les ateliers et le mentorat.",
+        feature2_desc:"Nous partageons nos méthodes, nos outils et notre expérience en impression 3D, en conception et en fabrication à travers des ateliers éducatifs et par le partage de nos connaissances sur nos réseaux sociaux.",
         feature3_title:"Amélioration continue",
         feature3_desc:"Nous testons, ajustons et faisons évoluer nos solutions pour les rendre plus confortables, plus fiables et mieux adaptées à l'usage réel.",
 
@@ -760,7 +787,7 @@
         entry2_btn:"Formulaire candidature",
         entry3_title:"Tu veux nous soutenir",
         entry3_desc:"Chaque don aide directement à acheter du matériel, à fabriquer les prothèses et à soutenir une initiative portée par des bénévoles.",
-        entry3_btn1:"Je donne maintenant",
+        entry3_btn1:"Je donne maintenant (À venir)",
 
         sec_label_members:"L'équipe",
         members_title:"Notre équipe",
@@ -780,7 +807,7 @@
         partners_desc:"Nous remercions sincèrement nos partenaires pour leur confiance et leur soutien. Leur engagement aide concrètement notre équipe à poursuivre cette mission bénévole.",
         partner1_desc:"Entreprise québécoise qui soutient e-NABLE Québec par son expertise, son matériel et un accompagnement précieux pour faire avancer nos réalisations.",
 
-        modal_link:"Lien",
+        modal_link:"Linkedin",
         modal_add_link:"Ajouter un lien"
       },
 
@@ -796,6 +823,7 @@
         drop_support_title:"Donate",
         drop_support_desc:"Support our mission through a donation.",
         hero_title_html:'<span class="ename">e-NABLE Quebec</span>Accessible <em>3D</em> prostheses, shaped with care.',
+        hero_subtitle_html:'<span class="ename_subtitle">Accessible <em>3D</em> prostheses, shaped with care.</span>',
         hero_lead:"e-NABLE Québec is first and foremost a volunteer-driven and supportive community. We bring together people who want to learn, build, adjust, and help, in order to provide accessible 3D-printed prostheses to people who need them. Technical and clinical expertise can support this mission, but it is human commitment that truly keeps it moving.",
         hero_cta_request:"Make a Request",
         hero_cta_join:"Join the Team",
@@ -809,7 +837,7 @@
         feature1_title:"Community Prostheses",
         feature1_desc:"We fabricate and adapt 3D-printed hand prostheses, offered free of charge according to each recipient's needs.",
         feature2_title:"Sharing Skills",
-        feature2_desc:"We share our methods, tools, and experience in 3D printing, design, and fabrication through collaboration, workshops, and mentoring.",
+        feature2_desc:"We share our methods, tools and experience in 3D printing, design and manufacturing through educational workshops and by sharing our knowledge on our social networks.",
         feature3_title:"Continuous Improvement",
         feature3_desc:"We test, refine, and improve our solutions to make them more comfortable, reliable, and suited to real-world use.",
 
@@ -843,7 +871,7 @@
         partners_desc:"We sincerely thank our partners for their trust and support. Their commitment concretely helps our team continue this volunteer-driven mission.",
         partner1_desc:"A Quebec company that supports e-NABLE Québec through its expertise, equipment, and valuable support in helping our work move forward.",
 
-        modal_link:"Link",
+        modal_link:"Linkedin",
         modal_add_link:"Add a link"
       }
     };
@@ -1039,9 +1067,9 @@
     resetGalleryAuto();
 
     const members = [
-    { name:"Nour Yazji", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Nour s’implique dans e-NABLE pour contribuer à des projets concrets ayant un impact direct sur la vie des utilisateurs.", bio_en:"Nour is involved in e-NABLE to contribute to hands-on projects that have a direct impact on users' lives.", photo:"assets/member.jpg", link:"#"},
-    { name:"Anderson Sato", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Anderson participe à e-NABLE avec l’envie de mettre ses compétences au service d’une initiative utile et accessible.", bio_en:"Anderson joined e-NABLE to apply his skills to a meaningful and accessible initiative.", photo:"assets/member.jpg", link:"#"},
-    { name:"Aymen Zire", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Aymen contribue à e-NABLE en développant des solutions simples et concrètes centrées sur les besoins des utilisateurs.", bio_en:"Aymen contributes to e-NABLE by developing simple, practical solutions focused on users’ needs.", photo:"assets/member.jpg", link:"#"},
+    { name:"Nour Yazji", role_fr:"Ingénieure Biomédical", role_en:"Biomedical Engineer", photo:"assets/member.jpg", link:"http://linkedin.com/in/nour-yazji"},
+    { name:"Anderson Sato", role_fr:"Spécialiste Cloud", role_en:"Cloud specialist", photo:"assets/member.jpg", link:"http://linkedin.com/in/anderson-sato"},
+    { name:"Aymen Zire", role_fr:"Étudiant ingénieure Biomédical", role_en:"Biomedical Engineer Student", photo:"assets/member.jpg", link:"https://www.linkedin.com/in/aymen-zire-19068b2b2/"},
     { name:"Yacine Mahdid", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Yacine s’engage dans e-NABLE pour participer à une initiative collaborative où chaque contribution a un réel impact.", bio_en:"Yacine is involved in e-NABLE to take part in a collaborative initiative where every contribution truly matters.", photo:"assets/member.jpg", link:"#"},
     { name:"Haguy Mafandala", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Haguy voit e-NABLE comme une opportunité de combiner engagement social et création de solutions utiles.", bio_en:"Haguy sees e-NABLE as an opportunity to combine social engagement with creating useful solutions.", photo:"assets/member.jpg", link:"#"},
     { name:"Yannick Lefebvre", role_fr:"Membre bénévole", role_en:"Volunteer Member", bio_fr:"Yannick s’implique dans e-NABLE pour contribuer à un projet humain et accessible, porté par un fort esprit d’équipe.", bio_en:"Yannick is involved in e-NABLE to contribute to a human-centered and accessible project driven by strong teamwork.", photo:"assets/member.jpg", link:"#"}
