@@ -155,12 +155,27 @@
     .btn-primary {
       background: var(--navy); color: #fff;
       border-color: var(--navy);
-      box-shadow: 0 4px 14px rgba(13,31,60,.18);
+      box-shadow: 0 4px 14px rgba(13,31,60,.18); white-space: nowrap;
     }
     .btn-primary:hover { box-shadow: 0 6px 20px rgba(13,31,60,.26); }
     .btn-ghost {
       background: var(--white); color: var(--text);
       border-color: var(--border-mid);
+    }
+    .btn-coming-soon {
+      background: var(--sand); color: var(--text-muted);
+      border-color: var(--border-mid);
+      pointer-events: none; cursor: default;
+      box-shadow: none; white-space: nowrap;
+    }
+    .btn-coming-soon:hover { transform: none; box-shadow: none; }
+    .badge-soon {
+      display: inline-flex; align-items: center;
+      font-size: 10px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; white-space: nowrap;
+      padding: 2px 7px; border-radius: var(--radius-sm);
+      background: rgba(13,31,60,.08); color: var(--text-muted);
+      line-height: 1.5; vertical-align: middle;
     }
 
     .hero-stats {

@@ -15,8 +15,6 @@ Site vitrine statique pour e-NABLE Quebec, heberge sur GitHub Pages.
 - `assets/css/styles.css`: styles visuels (couleurs, mise en page, responsive).
 - `assets/js/main.js`: logique interactive (langue, carrousel, filtres membres, modale).
 - `assets/`: images et icones utilisees par la page.
-- `.github/workflows/docs-sync.yml`: pipeline de mise a jour automatique de la documentation.
-- `scripts/update-readme.sh`: script qui met a jour la section auto du README.
 
 ## Comment fonctionne la page
 ### 1) Contenu et sections

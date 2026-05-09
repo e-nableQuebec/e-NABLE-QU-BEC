@@ -39,7 +39,7 @@
         entry2_btn:"Formulaire candidature",
         entry3_title:"Tu veux nous soutenir",
         entry3_desc:"Chaque don aide directement à acheter du matériel, à fabriquer les prothèses et à soutenir une initiative portée par des bénévoles.",
-        entry3_btn1:"Je donne maintenant (À venir)",
+        entry3_btn1:"Donnez maintenant <span class='badge-soon'>À venir</span>",
 
         sec_label_members:"L'équipe",
         members_title:"Notre équipe",
@@ -103,7 +103,7 @@
         entry2_btn:"Application Form",
         entry3_title:"Want to Support Us",
         entry3_desc:"Each donation directly helps buy materials, fabricate prostheses, and sustain a volunteer-led initiative.",
-        entry3_btn1:"Donate now",
+        entry3_btn1:"Donate now <span class='badge-soon'>Coming soon</span>",
 
         sec_label_members:"The Team",
         members_title:"Our Team",
@@ -479,4 +479,3 @@
     document.getElementById('langToggle').onclick = () => setLanguage(currentLang === 'fr' ? 'en' : 'fr');
 
     setLanguage(currentLang);
-  
